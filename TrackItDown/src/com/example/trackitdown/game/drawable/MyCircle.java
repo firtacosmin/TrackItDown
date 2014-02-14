@@ -24,6 +24,8 @@ public class MyCircle {
 		_thePaint.setARGB(255, 120, 120, 120);
 		_radius = DEFAULT_RADIUS;
 		_theTrajectory = new Trajectory(INITIAL_TRAJECTORY_A, INITIAL_TRAJECTORY_B, Trajectory.DIRECTION_X.LEFT, new Point(0,0));
+		_instanceNo = LAST_INSTANCE;
+		MyCircle.LAST_INSTANCE++;
 	}
 	public MyCircle(int a, int b, Trajectory.DIRECTION_X xDir, Point initP){
 
@@ -32,7 +34,7 @@ public class MyCircle {
 		_radius = DEFAULT_RADIUS;
 		_theTrajectory = new Trajectory(a,b,xDir,initP);
 		_instanceNo = LAST_INSTANCE;
-		LAST_INSTANCE++;
+		MyCircle.LAST_INSTANCE++;
 	}
 	
 	public boolean equals(Object obj){

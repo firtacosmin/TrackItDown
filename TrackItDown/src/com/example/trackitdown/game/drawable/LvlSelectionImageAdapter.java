@@ -56,7 +56,12 @@ public class LvlSelectionImageAdapter extends BaseAdapter{
     		R.drawable.lvl_3, R.drawable.lvl_4, 
     		R.drawable.lvl_5, R.drawable.lvl_6, 
     		R.drawable.lvl_7, R.drawable.lvl_8, 
-    		R.drawable.lvl_9
+    		R.drawable.lvl_9, R.drawable.lvl_10, 
+    		R.drawable.lvl_11, R.drawable.lvl_12, 
+    		R.drawable.lvl_13, R.drawable.lvl_14, 
+    		R.drawable.lvl_15, R.drawable.lvl_16, 
+    		R.drawable.lvl_17, R.drawable.lvl_18, 
+    		R.drawable.lvl_19, R.drawable.lvl_20
     };
 
 }

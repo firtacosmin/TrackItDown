@@ -35,48 +35,9 @@ public class LevelSelectionView extends Activity {
 	    gridview.setOnItemClickListener(new OnItemClickListener() {
 	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 	            //Toast.makeText(LevelSelectionView.this, "" + position, Toast.LENGTH_SHORT).show();
-
-	        	switch (position){
-	        	case 0:
-	        		_startGameIntent.putExtra(GAME_LVL, GameLvlMngGenerator.LEVELS.LEVEL_1);
-		    		startActivity(_startGameIntent);
-	        		break;
-	        	case 1:
-	        		_startGameIntent.putExtra(GAME_LVL, GameLvlMngGenerator.LEVELS.LEVEL_2);
-		    		startActivity(_startGameIntent);
-	        		break;
-	        	case 2:
-	        		_startGameIntent.putExtra(GAME_LVL, GameLvlMngGenerator.LEVELS.LEVEL_3);
-		    		startActivity(_startGameIntent);
-	        		break;
-	        	case 3:
-	        		_startGameIntent.putExtra(GAME_LVL, GameLvlMngGenerator.LEVELS.LEVEL_4);
-		    		startActivity(_startGameIntent);
-	        		break;
-	        	case 4:
-	        		_startGameIntent.putExtra(GAME_LVL, GameLvlMngGenerator.LEVELS.LEVEL_5);
-		    		startActivity(_startGameIntent);
-	        		break;
-	        	case 5:
-	        		_startGameIntent.putExtra(GAME_LVL, GameLvlMngGenerator.LEVELS.LEVEL_6);
-		    		startActivity(_startGameIntent);
-	        		break;
-	        	case 6:
-	        		_startGameIntent.putExtra(GAME_LVL, GameLvlMngGenerator.LEVELS.LEVEL_7);
-		    		startActivity(_startGameIntent);
-	        		break;
-	        	case 7:
-	        		_startGameIntent.putExtra(GAME_LVL, GameLvlMngGenerator.LEVELS.LEVEL_8);
-		    		startActivity(_startGameIntent);
-	        		break;
-	        	case 8:
-	        		_startGameIntent.putExtra(GAME_LVL, GameLvlMngGenerator.LEVELS.LEVEL_9);
-		    		startActivity(_startGameIntent);
-	        		break;
-	        	default:
-		            Toast.makeText(LevelSelectionView.this, "" + position, Toast.LENGTH_SHORT).show();
-	        		break;
-	        	}
+	        	_startGameIntent.putExtra(GAME_LVL, GameLvlMngGenerator.LEVELS.values()[position]);
+	    		startActivity(_startGameIntent);
+//	        	}
 	        }
 	    });
 

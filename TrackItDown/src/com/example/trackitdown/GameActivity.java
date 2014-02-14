@@ -46,7 +46,7 @@ public class GameActivity extends Activity {
 			width = display.getWidth(); 
 			height = display.getHeight(); 
 		}
-		GameLvlMng gameLvlMng = GameLvlMngGenerator.getLvl(lvl);
+		GameLvlMng gameLvlMng = GameLvlMngGenerator.getLvl(lvl,this);
 		_gameThread.setGameLvlMng(gameLvlMng);
 		_gameThread.setDisplaySize(width, height);
 		

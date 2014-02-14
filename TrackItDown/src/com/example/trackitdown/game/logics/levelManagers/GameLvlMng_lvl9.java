@@ -47,7 +47,6 @@ public class GameLvlMng_lvl9 extends GameLvlMng_lvl{
 		_backgroundPaint = new Paint();
 		_backgroundPaint.setARGB(255 , 255, 152, 73);
 		_winningCircleNo = 1;
-		_throughWallFlag = true;
 		
 		generateStartRandomCircles();
 		

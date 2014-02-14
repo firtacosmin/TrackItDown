@@ -1,5 +1,9 @@
 package com.example.trackitdown.game.logics;
 
+import android.content.Context;
+import android.content.res.Resources;
+
+import com.example.trackitdown.R;
 import com.example.trackitdown.game.logics.levelManagers.GameLvlMng_lvl;
 import com.example.trackitdown.game.logics.levelManagers.GameLvlMng_lvl1;
 import com.example.trackitdown.game.logics.levelManagers.GameLvlMng_lvl2;
@@ -13,12 +17,21 @@ import com.example.trackitdown.game.logics.levelManagers.GameLvlMng_lvl9;
 
 public class GameLvlMngGenerator {
 
-	public static enum LEVELS{LEVEL_1, LEVEL_2, LEVEL_3, LEVEL_4, LEVEL_5, LEVEL_6, LEVEL_7, LEVEL_8, LEVEL_9, LEVEL_10};
+	public static enum LEVELS{LEVEL_1, LEVEL_2, LEVEL_3, LEVEL_4, LEVEL_5, 
+		                      LEVEL_6, LEVEL_7, LEVEL_8, LEVEL_9, LEVEL_10, 
+		                      LEVEL_11, LEVEL_12, LEVEL_13, LEVEL_14, LEVEL_15, 
+		                      LEVEL_16, LEVEL_17, LEVEL_18, LEVEL_19, LEVEL_20, 
+		                      LEVEL_21, LEVEL_22, LEVEL_23, LEVEL_24, LEVEL_25, 
+		                      LEVEL_26, LEVEL_27, LEVEL_28, LEVEL_29, LEVEL_30};
 	
 	private static LEVELS _currentLevel;
 	
-	public static GameLvlMng getLvl(LEVELS lvl){
+	public static GameLvlMng getLvl(LEVELS lvl, Context c){
 		_currentLevel = lvl;
+		
+		Resources res = c.getResources();
+		int[] bits = res.getIntArray(R.array.levels);
+		
 		GameLvlMng_lvl lvlMng = null;
 		switch(lvl){
 		case LEVEL_1:
@@ -99,5 +112,8 @@ public class GameLvlMngGenerator {
 		 
 		return lvlMng;
 	}
+	
+	
+	
 	
 }

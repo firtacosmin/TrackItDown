@@ -1,7 +1,5 @@
 package com.example.trackitdown.game.logics.levelManagers;
 
-import java.util.Collection;
-import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.Vector;
@@ -61,8 +59,6 @@ public class GameLvlMng_lvl implements GameLvlMng {
 	
 	protected Vector<MyCircle> _theCircles;
 	protected  Vector<MyCircle> _winningCircle;
-	private Vector<MyCircle> _throughWallCircles;
-	private Hashtable<MyCircle, MyCircle> _throughtWallCirclesTable;
 	protected LvlGraphics _theGraphics;
 	
 	protected int _winningCircleNo = 1;
@@ -73,10 +69,6 @@ public class GameLvlMng_lvl implements GameLvlMng {
 	 * @desc flag to activate blinking feature
 	 */
 	protected boolean _blinkFlag = false;
-	/**
-	 * @desc flag that enables the through wall feature
-	 */
-	protected boolean _throughWallFlag = false;
 	
 	
 	private int _screenWidth = 100;
@@ -148,8 +140,6 @@ public class GameLvlMng_lvl implements GameLvlMng {
 		_retryBtnImgRect   = new Rect();
 		_nextLvlBtnImgRect = new Rect();
 		_menuBtnImgRect    = new Rect();
-		
-		_throughtWallCirclesTable = new Hashtable<MyCircle, MyCircle>();
 
 		//_theGraphics = new LvlGraphics();
 		
@@ -193,21 +183,6 @@ public class GameLvlMng_lvl implements GameLvlMng {
 			drawCircle(c, circ);
 		}
 
-		/*draw the circles that go through the wall*/
-		if ( true == _throughWallFlag ){
-//			Iterator<MyCircle> it = _throughWallCircles.iterator();
-//			while(it.hasNext()){
-//				MyCircle circ = it.next();
-//				drawCircle(c, circ);
-//
-//			}
-			Iterator<MyCircle> it = _throughtWallCirclesTable.values().iterator();
-			while(it.hasNext()){
-				MyCircle circ = it.next();
-				drawCircle(c, circ);
-			}
-		}
-
 		if ( _winCircleHidden && _blinkFlag ){
 			if ( _blinkStage == 1){
 				_blinkStage = 0;
@@ -244,14 +219,7 @@ public class GameLvlMng_lvl implements GameLvlMng {
 			if ( _phisicsToDo == PHISICS_TO_DO.COLLISION ){
 				checkColision();
 			}else{
-				
-				if ( true == _throughWallFlag ){
-					moveThroughWallCircles();
-					goThroughWall(_throughtWallCirclesTable.values());
-					goThroughWall(_theCircles);
-				}else{
-					checkWallHit();
-				}
+				checkWallHit();
 			}
 			//next point
 			Iterator<MyCircle> circleIt = _theCircles.iterator();
@@ -370,7 +338,6 @@ public class GameLvlMng_lvl implements GameLvlMng {
 	protected void generateStartRandomCircles(){
 		_winningCircle = new Vector<MyCircle>();
 		_theCircles =  new Vector<MyCircle>();
-		_throughWallCircles = new Vector<MyCircle>(_circleNumber);
 
 		/*generate the number of winning circles*/
 		for ( int i=0; i<_winningCircleNo; i++ ){
@@ -584,128 +551,6 @@ public class GameLvlMng_lvl implements GameLvlMng {
 		_phisicsToDo = PHISICS_TO_DO.COLLISION;
 	}
 	
-	/**
-	 * @desc method that will move the circles created for duplication 
-	 * 		on the other side of the wall
-	 */
-	private void moveThroughWallCircles(){
-		Iterator<MyCircle> it = _throughtWallCirclesTable.values().iterator();
-		while(it.hasNext()){
-			MyCircle circ = it.next();
-			circ.getTrajectory().getNextPoint();
-		}
-	}
-	
-	/**
-	 * @desc method that will test the circles that are going 
-	 * 		  to hit the wall and will pass then through
-	 */
-	private void goThroughWall(Collection<MyCircle> theCircles){
-		_throughWallCircles.clear();
-		
-		Iterator<MyCircle> circleIt = _theCircles.iterator();
-		while(circleIt.hasNext()){
-			MyCircle circ = circleIt.next();
-			int x = circ.getTrajectory().getCurrentPoint().x;
-			int y = circ.getTrajectory().getCurrentPoint().y;
-			int newX = 0;
-			int newY = 0;
-			boolean hit = false;
-			/*up hit*/
-			if ( y < _circleRadius ){
-				newX = _screenWidth - x;
-				newY = _screenHeight + y;
-				hit = true;
-			}else 
-			/*down hit*/
-			if ( y > _screenHeight - _circleRadius ){
-				newX = _screenWidth - x;
-				newY = y - _screenHeight;
-				hit = true;
-			}else
-			/*left hit*/
-			if ( x < _circleRadius ){
-				newX = _screenWidth + x;
-				newY = _screenHeight - y;
-				hit = true;
-			}else
-			/*right hit*/
-			if (x > _screenWidth - _circleRadius){
-				newX = x - _screenWidth;
-				newY = _screenHeight - y;
-				hit = true;
-			}
-			try{
-			
-			if ( true == hit ){
-				if ( false == allThroughTheWall(circ) ){
-				
-					/*create the new Circle*/
-//					MyCircle newC = new MyCircle(circ.getTrajectory().get_a(), 
-//							                     circ.getTrajectory().get_b(),
-//							                     circ.getTrajectory().getXDirection(),
-//							                     new Point(newX, newY));
-					
-					/*test if the circle is already added to the table*/
-					if ( !_throughtWallCirclesTable.containsKey(circ) ){
-						
-						MyCircle newC = new MyCircle();
-						newC.setPaint(circ.getPaint());
-						newC.setRadius(_circleRadius);
-						newC.getTrajectory().set_a(circ.getTrajectory().get_a());
-						newC.getTrajectory().set_b(circ.getTrajectory().get_b());
-						newC.getTrajectory().setXSpeed(circ.getTrajectory().getXSpeed());
-						newC.getTrajectory().setYSpeed(circ.getTrajectory().getYSpeed());
-						newC.getTrajectory().getCurrentPoint().x = newX;
-						newC.getTrajectory().getCurrentPoint().y = newY;
-						newC.getTrajectory().setXDirection(circ.getTrajectory().getXDirection());
-						newC.getTrajectory().setYDirection(circ.getTrajectory().getYDirection());
-						
-						_throughWallCircles.add(newC);
-						_throughtWallCirclesTable.put(circ, newC);
-					}
-				}else{
-					circ.getTrajectory().getCurrentPoint().x = _throughtWallCirclesTable.get(circ).getTrajectory().getCurrentPoint().x;
-					circ.getTrajectory().getCurrentPoint().y = _throughtWallCirclesTable.get(circ).getTrajectory().getCurrentPoint().y;
-					circ.getTrajectory().getLastPoint().x = _throughtWallCirclesTable.get(circ).getTrajectory().getCurrentPoint().x;
-					circ.getTrajectory().getLastPoint().y = _throughtWallCirclesTable.get(circ).getTrajectory().getCurrentPoint().y;
-					if ( _throughtWallCirclesTable.containsKey(_throughtWallCirclesTable.get(circ)) ){
-						/*a second circle created*/
-						MyCircle c = _throughtWallCirclesTable.get(_throughtWallCirclesTable.get(circ));
-						_throughtWallCirclesTable.remove(_throughtWallCirclesTable.get(circ));
-						_throughtWallCirclesTable.put(circ, c);
-					}
-				}
-			}else{
-				/*remove it from table*/
-				_throughtWallCirclesTable.remove(circ);
-			}
-			}catch(Exception ex){
-				Log.d("err",ex.getMessage());
-				Log.d("Cause:",ex.getCause().toString());
-			}
-			
-		}	
-		
-	}
-	
-	/**
-	 * @desc if the circle is fully passed the screen ( a screen enlarged with the circle diameter )
-	 * @param circ
-	 * @return
-	 */
-	private boolean allThroughTheWall(MyCircle circ){
-		int x = circ.getTrajectory().getCurrentPoint().x;
-		int y = circ.getTrajectory().getCurrentPoint().y;
-		if (x < - 2 * _circleRadius ||
-			x > _screenWidth + 2 * _circleRadius ||
-			y < - 2 * _circleRadius ||
-			y > _screenHeight + 2 * _circleRadius){
-			
-			return true;
-		}
-		return false;
-	}
 	
 	/**
 	 * @desc  the method that will check if the circles collide between them.
