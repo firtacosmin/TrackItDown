@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Track it down</string>
+    <string name="action_settings">Settings</string>
+    <string name="btn_start">Start</string>
+    <string name="btn_exit">Exit</string>
+    <string name="title_activity_level_selection_view">Level Selection</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="btn_startGame">Start new game</string>
+    <string name="title_activity_game">Take It Down</string>
+    <string name="lunar_layout_text_text">linar</string>
+    
+    
+    <string name="btn_startLvl1">1</string>
+    <string name="btn_startLvl2">2</string>
+    <string name="btn_startLvl3">3</string>
+    
+    <string name="img_desc">image</string>
+    
+    <string name="circle_not_touched">Please Touch a circle!</string>
+    <string name="touch_an_other_circle">Please touch an other circle</string>
+    
+
+</resources>

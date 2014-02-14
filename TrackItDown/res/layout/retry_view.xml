@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="50dp" 
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="match_parent"
+        android:layout_height="139dp"
+        android:src="@drawable/retry_img" 
+        android:contentDescription="@string/img_desc"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:baselineAligned="false"
+        android:gravity="center" >
+
+        <ImageView
+            android:id="@+id/retry_btn_btn_img"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/retry_btn" 
+            android:onClick="retryBtn_click"
+        	android:contentDescription="@string/img_desc"/>
+
+        <ImageView
+            android:id="@+id/back_to_menu_btn_img"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/menu_btn" 
+            android:onClick="backToMenuBtn_click"
+            android:contentDescription="@string/img_desc"/>
+
+    </LinearLayout>
+
+</LinearLayout>
