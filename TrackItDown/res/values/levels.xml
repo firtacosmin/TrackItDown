@@ -28,4 +28,124 @@
          -->
     </integer-array>
     
+    <!-- Level 1 -->
+    <integer name="circle_no_1">10</integer>
+    <integer name="winning_circle_no_1">1</integer>
+    <integer name="circle_speed_1">1</integer>
+    <integer name="observe_time_1">3000</integer>
+    <integer name="seek_time_1">5000</integer>
+    <integer name="circle_radius_1">25</integer>
+    
+    <color name="circle_img_1">#00ffaa</color>
+    <color name="win_circle_img_1">#bbffaa</color>
+    <color name="back_img_1">#0000aa</color>
+    
+    <bool name="blink_flag_1">false</bool>
+    
+    <!-- Level 2 -->
+    
+    <integer name="circle_no_2">13</integer>
+    <integer name="winning_circle_no_2">1</integer>
+    <integer name="circle_speed_2">1</integer>
+    <integer name="observe_time_2">3000</integer>
+    <integer name="seek_time_2">5000</integer>
+    <integer name="circle_radius_2">25</integer>
+    
+    <color name="circle_img_2">#00ffaa</color>
+    <color name="win_circle_img_2">#bbffaa</color>
+    <color name="back_img_2">#0000aa</color>
+    
+    <bool name="blink_flag_2">true</bool>
+    
+    <!-- Level 3 -->
+    
+    <integer name="circle_no_3">15</integer>
+    <integer name="winning_circle_no_3">1</integer>
+    <integer name="circle_speed_3">1</integer>
+    <integer name="observe_time_3">3000</integer>
+    <integer name="seek_time_3">5000</integer>
+    <integer name="circle_radius_3">25</integer>
+    
+    <color name="circle_img_3">#00ffaa</color>
+    <color name="win_circle_img_3">#bbffaa</color>
+    <color name="back_img_3">#0000aa</color>
+    
+    <bool name="blink_flag_3">false</bool>
+    
+    <!-- Level 4 -->
+    
+    <integer name="circle_no_4">15</integer>
+    <integer name="winning_circle_no_4">1</integer>
+    <integer name="circle_speed_4">1</integer>
+    <integer name="observe_time_4">3000</integer>
+    <integer name="seek_time_4">5000</integer>
+    <integer name="circle_radius_4">25</integer>
+    
+    <color name="circle_img_4">#00ffaa</color>
+    <color name="win_circle_img_4">#bbffaa</color>
+    <color name="back_img_4">#0000aa</color>
+    
+    <bool name="blink_flag_4">true</bool>
+    
+    <!-- Level 5 -->
+    
+    <integer name="circle_no_5">15</integer>
+    <integer name="winning_circle_no_5">1</integer>
+    <integer name="circle_speed_5">2</integer>
+    <integer name="observe_time_5">3000</integer>
+    <integer name="seek_time_5">5000</integer>
+    <integer name="circle_radius_5">25</integer>
+    
+    <color name="circle_img_5">#00ffaa</color>
+    <color name="win_circle_img_5">#bbffaa</color>
+    <color name="back_img_5">#0000aa</color>
+    
+    <bool name="blink_flag_5">false</bool>
+    
+    <!-- Level 6 -->
+    
+    <integer name="circle_no_6">15</integer>
+    <integer name="winning_circle_no_6">2</integer>
+    <integer name="circle_speed_6">2</integer>
+    <integer name="observe_time_6">3000</integer>
+    <integer name="seek_time_6">5000</integer>
+    <integer name="circle_radius_6">25</integer>
+    
+    <color name="circle_img_6">#00ffaa</color>
+    <color name="win_circle_img_6">#bbffaa</color>
+    <color name="back_img_6">#0000aa</color>
+    
+    <bool name="blink_flag_6">false</bool>
+    
+    <!-- Level 7 -->
+    
+    <integer name="circle_no_7">15</integer>
+    <integer name="winning_circle_no_7">2</integer>
+    <integer name="circle_speed_7">2</integer>
+    <integer name="observe_time_7">3000</integer>
+    <integer name="seek_time_7">5000</integer>
+    <integer name="circle_radius_7">25</integer>
+    
+    <color name="circle_img_7">#00ffaa</color>
+    <color name="win_circle_img_7">#bbffaa</color>
+    <color name="back_img_7">#0000aa</color>
+    
+    <bool name="blink_flag_7">true</bool>
+    
+    
+    <!-- Level 8 -->
+    
+    <integer name="circle_no_8">15</integer>
+    <integer name="winning_circle_no_8">2</integer>
+    <integer name="circle_speed_8">2</integer>
+    <integer name="observe_time_8">2000</integer>
+    <integer name="seek_time_8">7000</integer>
+    <integer name="circle_radius_8">25</integer>
+    
+    <color name="circle_img_8">#00ffaa</color>
+    <color name="win_circle_img_8">#bbffaa</color>
+    <color name="back_img_8">#0000aa</color>
+    
+    <bool name="blink_flag_8">true</bool>
+    
 </resources>

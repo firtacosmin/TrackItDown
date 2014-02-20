@@ -841,6 +841,46 @@ public class GameLvlMng_lvl implements GameLvlMng {
 		return false;
 	}
 
+	public void set_speed(int _speed) {
+		this._speed = _speed;
+	}
+
+	public void set_circleNumber(int _circleNumber) {
+		this._circleNumber = _circleNumber;
+	}
+
+	public void set_circleRadius(int _circleRadius) {
+		this._circleRadius = _circleRadius;
+	}
+
+	public void set_observeTime(long _observeTime) {
+		this._observeTime = _observeTime;
+	}
+
+	public void set_seekTime(long _seekTime) {
+		this._seekTime = _seekTime;
+	}
+
+	public void set_backgroundPaint(int _backgroundPaint) {
+		this._backgroundPaint = new Paint(_backgroundPaint);
+	}
+
+	public void set_circlesPaint(int _circlesPaint) {
+		this._circlesPaint = new Paint(_circlesPaint);
+	}
+
+	public void set_winningCirclePaint(int _winningCirclePaint) {
+		this._winningCirclePaint = new Paint(_winningCirclePaint);
+	}
+
+	public void set_winningCircleNo(int _winningCircleNo) {
+		this._winningCircleNo = _winningCircleNo;
+	}
+
+	public void set_blinkFlag(boolean _blinkFlag) {
+		this._blinkFlag = _blinkFlag;
+	}
+
 
 
 

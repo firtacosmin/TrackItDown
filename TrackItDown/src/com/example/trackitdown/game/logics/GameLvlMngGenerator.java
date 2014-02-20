@@ -31,14 +31,46 @@ public class GameLvlMngGenerator {
 		
 		Resources res = c.getResources();
 		int[] bits = res.getIntArray(R.array.levels);
+		int lvl_no = lvl.ordinal() + 1;
+		
+		int circle_no = 0;
+		int winning_circle_no = 0;
+		int circle_speed = 0;
+		int observe_time = 0;
+		int seek_time = 0;
+		int circle_radius = 0;
+		int circle_color = 0;
+		int win_circ_color = 0;
+		int back_color = 0;
+		boolean blink_flg = true;
+		
+		
 		
 		GameLvlMng_lvl lvlMng = null;
 		switch(lvl){
 		case LEVEL_1:
-			lvlMng = new GameLvlMng_lvl1();
+			 circle_no = R.integer.circle_no_1;
+			 winning_circle_no = R.integer.winning_circle_no_1;
+			 circle_speed = R.integer.circle_speed_1;
+			 observe_time = R.integer.observe_time_1;
+			 seek_time = R.integer.seek_time_1;
+			 circle_radius = R.integer.circle_radius_1;
+			 circle_color = res.getColor(R.color.circle_img_1);
+			 win_circ_color = res.getColor(R.color.win_circle_img_1);
+			 back_color = res.getColor(R.color.back_img_1);
+			 blink_flg = res.getBoolean(R.bool.blink_flag_1);
 			break;
 		case LEVEL_2:
-			lvlMng = new GameLvlMng_lvl2();
+			 circle_no = R.integer.circle_no_2;
+			 winning_circle_no = R.integer.winning_circle_no_2;
+			 circle_speed = R.integer.circle_speed_2;
+			 observe_time = R.integer.observe_time_2;
+			 seek_time = R.integer.seek_time_2;
+			 circle_radius = R.integer.circle_radius_2;
+			 circle_color = res.getColor(R.color.circle_img_2);
+			 win_circ_color = res.getColor(R.color.win_circle_img_2);
+			 back_color = res.getColor(R.color.back_img_2);
+			 blink_flg = res.getBoolean(R.bool.blink_flag_2);
 			break;
 		case LEVEL_3:
 			lvlMng = new GameLvlMng_lvl3();
@@ -66,6 +98,20 @@ public class GameLvlMngGenerator {
 			break;
 		}
 		 
+		
+
+		
+		GameLvlMng_lvl lvl_mng = new GameLvlMng_lvl(true);
+		lvl_mng.set_circleNumber(circle_no);
+		lvl_mng.set_winningCircleNo(winning_circle_no);
+		lvl_mng.set_speed(circle_speed);
+		lvl_mng.set_observeTime(observe_time);
+		lvl_mng.set_seekTime(seek_time);
+		lvl_mng.set_circleRadius(circle_radius);
+		lvl_mng.set_circlesPaint(circle_color);
+		lvl_mng.set_winningCirclePaint(win_circ_color);
+		lvl_mng.set_backgroundPaint(back_color);
+		lvl_mng.set_blinkFlag(blink_flg);
 		return lvlMng;
 	}
 	
