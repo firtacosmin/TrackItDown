@@ -335,7 +335,7 @@ public class GameLvlMng_lvl implements GameLvlMng {
 	 * @desc the method that initializes the circles and generates 
 	 *       random positions for them 
 	 */
-	protected void generateStartRandomCircles(){
+	public void generateStartRandomCircles(){
 		_winningCircle = new Vector<MyCircle>();
 		_theCircles =  new Vector<MyCircle>();
 

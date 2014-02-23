@@ -91,7 +91,7 @@ public class GameMainThread extends Thread {
 			if ( _gameLvl.checkWin()  ){
 				/*game won*/
 				/*go to next level*/
-				_gameLvl = GameLvlMngGenerator.nextLevel();
+				_gameLvl = GameLvlMngGenerator.nextLevel(_theContext);
 				_gameLvl.setContext(_theContext);
 				_gameLvl.setWindowSize(_screenWidth, _screenHeight);
 				_gameLvl.startGame();

@@ -148,4 +148,20 @@
     
     <bool name="blink_flag_8">true</bool>
     
+    
+    <!-- Level 9 -->
+    
+    <integer name="circle_no_9">15</integer>
+    <integer name="winning_circle_no_9">2</integer>
+    <integer name="circle_speed_9">2</integer>
+    <integer name="observe_time_9">2000</integer>
+    <integer name="seek_time_9">8000</integer>
+    <integer name="circle_radius_9">20</integer>
+    
+    <color name="circle_img_9">#00ffaa</color>
+    <color name="win_circle_img_9">#bbffaa</color>
+    <color name="back_img_9">#0000aa</color>
+    
+    <bool name="blink_flag_9">false</bool>
+    
 </resources>
