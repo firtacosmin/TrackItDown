@@ -1,10 +1,11 @@
 package com.example.trackitdown.game.drawable;
 
-import com.example.trackitdown.game.logics.levelManagers.Trajectory;
-
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
+import android.graphics.drawable.Drawable;
+
+import com.example.trackitdown.game.logics.levelManagers.Trajectory;
 
 public class MyCircle {
 	private static int LAST_INSTANCE = 0;
@@ -18,6 +19,10 @@ public class MyCircle {
 	private Paint _thePaint;
 	private int _radius;
 	private Trajectory _theTrajectory;
+	
+	private Drawable _circleImage = null;
+	
+	
 
 	public MyCircle(){
 		_thePaint = new Paint();
@@ -72,12 +77,26 @@ public class MyCircle {
 	public Trajectory getTrajectory(){
 		return _theTrajectory;
 	}
+	public void setImage(Drawable img){
+		_circleImage = img;
+	}
 
 	public void draw(Canvas c){
-		c.drawCircle(_theTrajectory.getCurrentPoint().x, _theTrajectory.getCurrentPoint().y, _radius, _thePaint);
-		Paint p = new Paint();
-		p.setARGB(255, 0, 250, 0);
-		c.drawCircle(_theTrajectory.getCurrentPoint().x, _theTrajectory.getCurrentPoint().y, 3, p);
+//		if ( _circleImage != null ){
+			/*recalculate rectangle position from circle center*/
+			int rectX = _theTrajectory.getCurrentPoint().x - _radius;
+			int rectY = _theTrajectory.getCurrentPoint().y - _radius;
+			_circleImage.setBounds(rectX, 
+					               rectY, 
+					               rectX + 2 * _radius, 
+					               rectY + 2 * _radius);
+			_circleImage.draw(c);
+//		}else{
+//			c.drawCircle(_theTrajectory.getCurrentPoint().x, _theTrajectory.getCurrentPoint().y, _radius, _thePaint);
+//			Paint p = new Paint();
+//			p.setARGB(255, 0, 250, 0);
+//			c.drawCircle(_theTrajectory.getCurrentPoint().x, _theTrajectory.getCurrentPoint().y, 3, p);
+//		}
 	}
 	
 	

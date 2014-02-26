@@ -36,7 +36,7 @@
     <integer name="seek_time_1">5000</integer>
     <integer name="circle_radius_1">25</integer>
     
-    <color name="circle_img_1">#00ffaa</color>
+    <color name="circle_img_1">#FF2631</color>
     <color name="win_circle_img_1">#bbffaa</color>
     <color name="back_img_1">#0000aa</color>
     

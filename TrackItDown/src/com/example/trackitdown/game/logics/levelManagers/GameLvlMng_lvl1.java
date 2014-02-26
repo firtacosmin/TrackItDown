@@ -1,5 +1,8 @@
 package com.example.trackitdown.game.logics.levelManagers;
 
+import com.example.trackitdown.R;
+
+import android.content.Context;
 import android.graphics.Paint;
 
 public class GameLvlMng_lvl1  extends GameLvlMng_lvl {
@@ -27,7 +30,7 @@ public class GameLvlMng_lvl1  extends GameLvlMng_lvl {
 
 	
 	
-	public GameLvlMng_lvl1(){
+	public GameLvlMng_lvl1(Context c){
 		super(true);
 		_speed = _lvl1_speed;
 		_circleNumber = _lvl1_circleNumber;
@@ -43,7 +46,11 @@ public class GameLvlMng_lvl1  extends GameLvlMng_lvl {
 		_winningCirclePaint.setARGB(255, 0, 255, 0);
 		/*init the background paint*/
 		_backgroundPaint = new Paint();
-		_backgroundPaint.setARGB(255 , 0, 0, 255);
+		_backgroundPaint.setARGB(255 , 0, 255, 0);
+		
+		setWinningCircleImg(c.getResources().getDrawable(R.drawable.ball_1));
+		setCircleImg(c.getResources().getDrawable(R.drawable.ball_2));
+		setBackgroundImg(c.getResources().getDrawable(R.drawable.bk_1));
 		
 		
 		generateStartRandomCircles();

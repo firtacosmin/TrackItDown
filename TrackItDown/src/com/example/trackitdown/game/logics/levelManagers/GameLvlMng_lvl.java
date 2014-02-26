@@ -54,6 +54,9 @@ public class GameLvlMng_lvl implements GameLvlMng {
 	protected Paint _backgroundPaint;
 	protected Paint _circlesPaint;
 	protected Paint _winningCirclePaint;
+	protected Drawable _winningCircleImg;
+	protected Drawable _circleImg;
+	protected Drawable _BackgroundImg;
 	
 	
 	
@@ -96,6 +99,8 @@ public class GameLvlMng_lvl implements GameLvlMng {
 	private Rect _retryBtnImgRect;
 	private Rect _nextLvlBtnImgRect;
 	private Rect _menuBtnImgRect;
+	
+	
 	
 	
 	
@@ -168,13 +173,39 @@ public class GameLvlMng_lvl implements GameLvlMng {
 	}
 	
 	
+
+	/**
+	 * @desc Method for setting the image used for setting the image used for drawing the winning circles
+	 * @param img
+	 */
+	public void setWinningCircleImg(Drawable img){
+		_winningCircleImg = img;
+	}
+
+	/**
+	 * @desc method for setting the image used for drawing the ordinary circles
+	 * @param img
+	 */
+	public void setCircleImg(Drawable img){
+		_circleImg = img;
+	}
+	/**
+	 * @desc method for setting the image used for drawing the background image
+	 * @param img
+	 */
+	public void setBackgroundImg(Drawable img){
+		_BackgroundImg = img;
+	}
+	
 	/**
 	 * @desc  method that redraws all the circles.
 	 * @param c
 	 */
 	public void Draw(Canvas c){
 		/*draw the background*/
-		c.drawRect(0, 0, _screenWidth , _screenHeight , _backgroundPaint);
+//		c.drawRect(0, 0, _screenWidth , _screenHeight , _backgroundPaint);
+		_BackgroundImg.setBounds(0, 0, _screenWidth, _screenHeight);
+		_BackgroundImg.draw(c);
 		
 		/*draw the circles*/
 		Iterator<MyCircle> circleIt = _theCircles.iterator();
@@ -343,7 +374,7 @@ public class GameLvlMng_lvl implements GameLvlMng {
 		for ( int i=0; i<_winningCircleNo; i++ ){
 		
 			MyCircle winningCircle = new MyCircle();
-			winningCircle.setPaint(_winningCirclePaint);
+			winningCircle.setImage(_winningCircleImg);
 			winningCircle.getTrajectory().setXSpeed(_speed);
 			if ( (new Random()).nextInt(100) % 2 == 0){
 				winningCircle.getTrajectory().flipXDirection();
@@ -357,7 +388,11 @@ public class GameLvlMng_lvl implements GameLvlMng {
 		/*add all the circles to the vector*/
 		for ( int i=0; i<_circleNumber - _winningCircleNo; i++ ){
 			MyCircle c = new MyCircle();
-			c.setPaint(_circlesPaint);
+			if ( _circleImg != null ){
+				c.setImage(_circleImg);
+			}else{
+				c.setPaint(_circlesPaint);
+			}
 			Point pos = new Point(1,1);//generateRandomPoint();
 			c.getTrajectory().getCurrentPoint().x = pos.x;
 			c.getTrajectory().getCurrentPoint().y = pos.y;
@@ -390,9 +425,11 @@ public class GameLvlMng_lvl implements GameLvlMng {
 			if ( _gameState == GAME_STATES.PLAY ){
 				/*if the circles are still moving*/
 				if ( _blinkStage == 1){
-					circ.setPaint(_circlesPaint);
+//					circ.setPaint(_circlesPaint);
+					circ.setImage(_circleImg);
 				}else{
-					circ.setPaint(_winningCirclePaint);
+//					circ.setPaint(_winningCirclePaint);
+					circ.setImage(_winningCircleImg);
 				}
 			}
 		}
@@ -719,12 +756,14 @@ public class GameLvlMng_lvl implements GameLvlMng {
 			while(circleIt.hasNext()){
 	
 				MyCircle circ = circleIt.next();
-				circ.setPaint(_circlesPaint);
+//				circ.setPaint(_circlesPaint);
+				circ.setImage(_circleImg);
 			}
 		}else{
 			circleIt = _theCircles.iterator();
 			while(circleIt.hasNext()){
-				circleIt.next().setPaint(_circlesPaint);
+//				circleIt.next().setPaint(_circlesPaint);
+				circleIt.next().setImage(_circleImg);
 			}
 		}
 		_winCircleHidden = true;
@@ -742,14 +781,16 @@ public class GameLvlMng_lvl implements GameLvlMng {
 			while(circleIt.hasNext()){
 	
 				MyCircle circ = circleIt.next();
-				circ.setPaint(_circlesPaint);
+//				circ.setPaint(_circlesPaint);
+				circ.setImage(_circleImg);
 			}
 		}
 		circleIt = _winningCircle.iterator();
 		while(circleIt.hasNext()){
 
 			MyCircle circ = circleIt.next();
-			circ.setPaint(_winningCirclePaint);
+//			circ.setPaint(_winningCirclePaint);
+			circ.setImage(_winningCircleImg);
 		}
 		
 		_winCircleHidden = false;
@@ -806,7 +847,12 @@ public class GameLvlMng_lvl implements GameLvlMng {
 	 */
 	private void restart(){		
 		regenerateCirclePositions();
-		_winningCircle.get(0).setPaint(_winningCirclePaint);
+//		_winningCircle.get(0).setPaint(_winningCirclePaint);
+		Iterator<MyCircle> winIt = _winningCircle.iterator();
+		while ( winIt.hasNext() ){
+			MyCircle circ = winIt.next();
+			circ.setImage(_winningCircleImg);
+		}
 		startStageTimer();
 		
 	}
