@@ -21,5 +21,8 @@
     <string name="circle_not_touched">Please Touch a circle!</string>
     <string name="touch_an_other_circle">Please touch an other circle</string>
     
+    <string name="hint_lvl1_observe">Keep an eye on the ball.</string>
+    <string name="hint_lvl1_seek"   >Do not to lose site of it.</string>
+    <string name="hint_lvl1_chose"  >Chose the tagged ball</string>
 
 </resources>

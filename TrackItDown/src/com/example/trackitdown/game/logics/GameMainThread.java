@@ -5,6 +5,7 @@ import com.example.trackitdown.GameActivity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.SurfaceHolder;
 
@@ -63,7 +64,8 @@ public class GameMainThread extends Thread {
 	
 	
 	public void run(){
-		
+
+		Looper.prepare();
 		_gameLvl.startGame();
 		
 		while( _run ){
@@ -145,7 +147,7 @@ public class GameMainThread extends Thread {
 			
 			
 		}catch(Exception ex){
-			
+			Log.e(ex.getLocalizedMessage(), ex.getMessage());
 		}
 	
 	}

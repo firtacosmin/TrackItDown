@@ -21,7 +21,7 @@ import com.example.trackitdown.game.logics.GameLvlMng;
 
 public class GameLvlMng_lvl implements GameLvlMng {
 
-	private enum GAME_STATES{PLAY, CHOSE, STATUS_WIN, STATUS_LOSE};
+	protected enum GAME_STATES{PLAY, CHOSE, STATUS_WIN, STATUS_LOSE};
 	private enum PHISICS_TO_DO{WALL, COLLISION};
 	
 	private static final int _STATUS_WAIT_TIME=500;
@@ -74,12 +74,12 @@ public class GameLvlMng_lvl implements GameLvlMng {
 	protected boolean _blinkFlag = false;
 	
 	
-	private int _screenWidth = 100;
-	private int _screenHeight = 100;
+	protected int _screenWidth = 100;
+	protected int _screenHeight = 100;
 	
 	private PHISICS_TO_DO _phisicsToDo = PHISICS_TO_DO.WALL;
 	
-	private Context _theContext = null;
+	protected Context _theContext = null;
 	
 
 	
@@ -87,7 +87,7 @@ public class GameLvlMng_lvl implements GameLvlMng {
 	private boolean _stop = false;
 	
 	
-	private GAME_STATES _gameState;
+	protected GAME_STATES _gameState;
 	
 	private Drawable _retry_img;
 	private Drawable _retry_img_btn;
@@ -116,7 +116,7 @@ public class GameLvlMng_lvl implements GameLvlMng {
 	 * @desc the number of circles are hit in the chose state
 	 */
 	private int _noCirclesHit = 0;
-	private boolean _winCircleHidden = false;
+	protected boolean _winCircleHidden = false;
 	
 	public GameLvlMng_lvl(){
 		
@@ -292,9 +292,9 @@ public class GameLvlMng_lvl implements GameLvlMng {
 									   _theContext.getString(R.string.touch_an_other_circle), 
 									   Toast.LENGTH_SHORT).show();
 					}else{
-						Toast.makeText(_theContext, 
-								       _theContext.getString(R.string.circle_not_touched), 
-								       Toast.LENGTH_SHORT).show();
+							Toast.makeText(_theContext, 
+									       _theContext.getString(R.string.circle_not_touched), 
+									       Toast.LENGTH_SHORT).show();
 					}
 					break;
 					
@@ -601,7 +601,7 @@ public class GameLvlMng_lvl implements GameLvlMng {
 		double distance = Math.sqrt((secondP.x - firstP.x)*(secondP.x - firstP.x) + (secondP.y - firstP.y)*(secondP.y - firstP.y));
 		if ( distance < 2.5*_circleRadius )
 		{
-			Log.d("Colision", first + " with " +second );
+			//Log.d("Colision", first + " with " +second );
 			/*Collision detected*/
 			if ( areGettingCloser(_theCircles.get(first).getTrajectory(), _theCircles.get(second).getTrajectory()) ){
 				/*detect direction*/
@@ -845,7 +845,7 @@ public class GameLvlMng_lvl implements GameLvlMng {
 	/**
 	 * @desc restarts the game if the user does not guess the circle
 	 */
-	private void restart(){		
+	protected void restart(){		
 		regenerateCirclePositions();
 //		_winningCircle.get(0).setPaint(_winningCirclePaint);
 		Iterator<MyCircle> winIt = _winningCircle.iterator();
