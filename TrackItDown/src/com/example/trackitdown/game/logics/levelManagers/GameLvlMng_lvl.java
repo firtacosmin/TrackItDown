@@ -319,6 +319,7 @@ public class GameLvlMng_lvl implements GameLvlMng {
 					}else if ( _menuBtnImgRect.contains(x, y) ){
 						/*press go to menu button*/
 						_stop = true;
+						_win = true;
 					}else if ( _nextLvlBtnImgRect.contains(x,y) ){
 						_win = true;
 					}

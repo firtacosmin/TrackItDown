@@ -13,9 +13,11 @@ public class LvlSelectionImageAdapter extends BaseAdapter{
 
 	
 	private Context _theContext;
+	private int _lastLevel;
 	
-	public LvlSelectionImageAdapter(Context c){
+	public LvlSelectionImageAdapter(Context c, int currentLvl){
 		_theContext = c;
+		_lastLevel = currentLvl;
 	}
 	
 	@Override
@@ -34,6 +36,10 @@ public class LvlSelectionImageAdapter extends BaseAdapter{
 	public long getItemId(int position) {
 		return _thumbs[position];
 	}
+	
+	public void setCurrentLevel(int lvl){
+		_lastLevel = lvl;
+	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
@@ -46,7 +52,11 @@ public class LvlSelectionImageAdapter extends BaseAdapter{
 		}else{
 			img = (ImageView) convertView;
 		}
-		img.setImageResource(_thumbs[position]);
+		if ( position <= _lastLevel ){
+			img.setImageResource(_thumbs[position]);
+		}else{
+			img.setImageResource(R.drawable.lvl_lock);
+		}
 		return img;
 	}
 	

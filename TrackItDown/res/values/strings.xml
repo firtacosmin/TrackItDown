@@ -24,5 +24,7 @@
     <string name="hint_lvl1_observe">Keep an eye on the ball.</string>
     <string name="hint_lvl1_seek"   >Do not to lose site of it.</string>
     <string name="hint_lvl1_chose"  >Chose the tagged ball</string>
+    
+    <string name="lvl_locked_open_msj">Level currently locked. Win previous levels untill here to unlock it.</string>
 
 </resources>

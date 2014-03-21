@@ -89,8 +89,11 @@ public class GameMainThread extends Thread {
 				/*game won => stop thread*/
 				stopGame();
 				_theContext.finish();
-			}
-			if ( _gameLvl.checkWin()  ){
+				if ( _gameLvl.checkWin() ){
+					/*if the game has been wan then increment the level to unlock it on the grid*/
+					GameLvlMngGenerator.setLevel(GameLvlMngGenerator.getCurrentLevel() + 1);
+				}
+			}else if ( _gameLvl.checkWin()  ){
 				/*game won*/
 				/*go to next level*/
 				_gameLvl = GameLvlMngGenerator.nextLevel(_theContext);

@@ -15,11 +15,18 @@ import android.widget.Toast;
 
 import com.example.trackitdown.game.drawable.LvlSelectionImageAdapter;
 import com.example.trackitdown.game.logics.GameLvlMngGenerator;
+import com.example.trackitdown.game.logics.db.ProgressDB;
+import com.example.trackitdown.game.logics.db.ProgressWrapper;
 
 public class LevelSelectionView extends Activity {
 
 	public static final String GAME_LVL = "com.example.trackitdown.GAME_LVL";
 	private Intent _startGameIntent;
+	private int _currentLevel;
+	private LvlSelectionImageAdapter _lvlGridAdaptor;
+	public static final int LVL_CHANGE_REQUEST_CODE=1; 
+	public static final String LVL_CHANGE_EXTRA_NAME="NEW_LVL";
+	private GridView gridview ;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -29,18 +36,47 @@ public class LevelSelectionView extends Activity {
 		setContentView(R.layout.activity_level_selection_view);
 		// Show the Up button in the action bar.
 		setupActionBar();
-		GridView gridview = (GridView) findViewById(R.id.gridview);
-	    gridview.setAdapter(new LvlSelectionImageAdapter(this));
+		gridview = (GridView) findViewById(R.id.gridview);
+		/*get the level from main activity*/
+		_currentLevel = getIntent().getIntExtra(LevelSelectionView.GAME_LVL,0);
+		GameLvlMngGenerator.setLevel(_currentLevel);
+		_lvlGridAdaptor = new LvlSelectionImageAdapter(this,_currentLevel);
+	    gridview.setAdapter(_lvlGridAdaptor);
 	    _startGameIntent = new Intent(this, GameActivity.class);
 	    gridview.setOnItemClickListener(new OnItemClickListener() {
 	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 	            //Toast.makeText(LevelSelectionView.this, "" + position, Toast.LENGTH_SHORT).show();
-	        	_startGameIntent.putExtra(GAME_LVL, GameLvlMngGenerator.LEVELS.values()[position]);
-	    		startActivity(_startGameIntent);
+	        	if ( position <= _currentLevel ){
+		        	_startGameIntent.putExtra(GAME_LVL, GameLvlMngGenerator.LEVELS.values()[position]);
+		    		startActivity(_startGameIntent);
+	        	}else{
+	        		/*if level still locked*/
+	        		Toast.makeText(LevelSelectionView.this, getString(R.string.lvl_locked_open_msj), Toast.LENGTH_SHORT).show();
+	        	}
 //	        	}
 	        }
 	    });
 
+	}
+
+	public void onStart(){
+		super.onStart();
+		int newLvl = GameLvlMngGenerator.getCurrentLevel();
+		if ( newLvl != _currentLevel  ){
+		//_lvlGridAdaptor.setCurrentLevel(_currentLevel);
+			_currentLevel = newLvl;
+			_lvlGridAdaptor = new LvlSelectionImageAdapter(this, _currentLevel); 
+			gridview.setAdapter(_lvlGridAdaptor);
+		}
+	}
+	
+	
+	
+	public int getCurrentLevel(){
+		return _currentLevel;
+	}
+	public void setCurrentLevel(int lvl){
+		_currentLevel = lvl;
 	}
 
 	/**

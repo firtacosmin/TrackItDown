@@ -3,6 +3,7 @@ package com.example.trackitdown;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Display;
@@ -21,6 +22,7 @@ public class GameActivity extends Activity {
 	
 	private GameSurfaceView _gameView;
 	private GameMainThread _gameThread;
+	private GameLvlMngGenerator.LEVELS _theLevel;
 
 	@SuppressWarnings("deprecation")
 	@SuppressLint("NewApi")
@@ -33,7 +35,8 @@ public class GameActivity extends Activity {
 		setContentView(R.layout.activity_game);
 		_gameView = (GameSurfaceView)findViewById(R.id.gameView);
 		_gameThread = _gameView.getThread();
-		GameLvlMngGenerator.LEVELS lvl = (GameLvlMngGenerator.LEVELS)getIntent().getSerializableExtra(LevelSelectionView.GAME_LVL);
+		_theLevel = (GameLvlMngGenerator.LEVELS)getIntent().getSerializableExtra(LevelSelectionView.GAME_LVL);
+		
 		Display display = getWindowManager().getDefaultDisplay();
 		int width;
 		int height;
@@ -46,7 +49,7 @@ public class GameActivity extends Activity {
 			width = display.getWidth(); 
 			height = display.getHeight(); 
 		}
-		GameLvlMng gameLvlMng = GameLvlMngGenerator.getLvl(lvl,this);
+		GameLvlMng gameLvlMng = GameLvlMngGenerator.getLvl(_theLevel,this);
 		_gameThread.setGameLvlMng(gameLvlMng);
 		_gameThread.setDisplaySize(width, height);
 		
