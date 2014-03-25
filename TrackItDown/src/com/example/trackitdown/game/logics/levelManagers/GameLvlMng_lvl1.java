@@ -18,7 +18,7 @@ public class GameLvlMng_lvl1  extends GameLvlMng_lvl {
 	 * CONFIGURABLE
 	 * */
 	
-	private int _lvl1_circleNumber = 10;
+	private int _lvl1_circleNumber = 20;
 	private int _lvl1_speed = 1;	
 	/**
 	 * the amount of time the win circle has different color.

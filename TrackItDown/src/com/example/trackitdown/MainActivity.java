@@ -15,18 +15,18 @@ import com.example.trackitdown.game.logics.db.ProgressWrapper;
 
 public class MainActivity extends Activity {
 
+	
 	private int _lvlFromDb;
+	private int _nextView;
 	private boolean _created = false;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_main);
 		getCurrentLevelFromDb();
 
 		_created = true;
+		
 	}
 
 	@Override
@@ -37,8 +37,9 @@ public class MainActivity extends Activity {
 	}
 	
 	public void startLevelSelection(View view){
+		_nextView = R.layout.activity_level_selection_view;
 		Intent startActivIntent = new Intent(this, LevelSelectionView.class);
-		startActivIntent.putExtra(LevelSelectionView.GAME_LVL, _lvlFromDb);
+		startActivIntent.putExtra(GameActivity.GAME_LVL, _lvlFromDb);
 		startActivity(startActivIntent);
 		
 	}
@@ -49,23 +50,36 @@ public class MainActivity extends Activity {
 	 */
 	public void onResume(){
 		super.onResume();
-		if ( !_created ){
-			/*if not called after oncreate()*/
-			ProgressDB p = ProgressWrapper.getInstance(this);
-			p.setProgress(GameLvlMngGenerator.getCurrentLevel() );
-			_lvlFromDb = GameLvlMngGenerator.getCurrentLevel();
-		}
-		else
-		{
-			/*if called after oncreate();*/
-			/*note that the next time will not be after oncreate*/
-			_created = false;
+		if ( _nextView == R.layout.activity_level_selection_view ){
+			if ( !_created ){
+				/*if not called after oncreate()*/
+				ProgressDB p = ProgressWrapper.getInstance(this);
+				p.setProgress(GameLvlMngGenerator.getCurrentLevel() );
+				_lvlFromDb = GameLvlMngGenerator.getCurrentLevel();
+			}
+			else
+			{
+				/*if called after oncreate();*/
+				/*note that the next time will not be after oncreate*/
+				_created = false;
+			}
 		}
 	}
 	
 	
 	public void exitApp(View view){
 		finish();
+	}
+	
+	/**
+	 * @desc method called when "Start custom app" btn is pressed.
+	 * 		 It will start the custom app if the reached level is good
+	 * @param view
+	 */
+	public void startCustom(View view){
+		_nextView = R.layout.activity_custom_game_settings;
+		Intent intent = new Intent(this, CustomGameSettings.class);
+		startActivity(intent);
 	}
 	/**
 	 * @desc get the last level from the database

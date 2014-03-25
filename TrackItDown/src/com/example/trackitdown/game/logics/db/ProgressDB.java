@@ -1,6 +1,5 @@
 package com.example.trackitdown.game.logics.db;
 
-import android.content.Context;
 
 public interface ProgressDB {
 

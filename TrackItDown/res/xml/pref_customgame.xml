@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    <ListPreference android:entryValues="@array/ball_color_values_array" 
+        android:positiveButtonText="null" 
+        android:negativeButtonText="null" 
+        android:entries="@array/ball_color_entry_array" 
+        android:key="pref_ball_color" 
+        android:title="@string/ball_collor_pref_name"/>
+    <ListPreference android:entryValues="@array/ball_color_values_array" 
+        android:positiveButtonText="null" 
+        android:key="pref_win_ball_color" 
+        android:negativeButtonText="null" 
+        android:title="@string/win_ball_color_pref_name" 
+        android:entries="@array/ball_color_entry_array"/>
+    <CheckBoxPreference android:summaryOn=" " android:key="pref_blinkCheck" android:title="@string/use_blink_pref_name" android:defaultValue="false" android:summary="@string/use_blink_pref_sumary"/>
+    <ListPreference android:entryValues="@array/ball_speeds_values_array" android:positiveButtonText="null" android:key="pref_speed" android:negativeButtonText="null" android:title="@string/ball_speed_pref_name" android:entries="@array/ball_speeds_entry_array"/>
+    
+    
+
+</PreferenceScreen>

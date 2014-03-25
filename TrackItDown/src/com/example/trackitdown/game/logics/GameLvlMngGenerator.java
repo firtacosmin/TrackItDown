@@ -1,9 +1,7 @@
 package com.example.trackitdown.game.logics;
 
 import android.content.Context;
-import android.content.res.Resources;
 
-import com.example.trackitdown.R;
 import com.example.trackitdown.game.logics.levelManagers.GameLvlMng_lvl;
 import com.example.trackitdown.game.logics.levelManagers.GameLvlMng_lvl1;
 import com.example.trackitdown.game.logics.levelManagers.GameLvlMng_lvl2;

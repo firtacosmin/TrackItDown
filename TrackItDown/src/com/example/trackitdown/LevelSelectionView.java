@@ -15,12 +15,9 @@ import android.widget.Toast;
 
 import com.example.trackitdown.game.drawable.LvlSelectionImageAdapter;
 import com.example.trackitdown.game.logics.GameLvlMngGenerator;
-import com.example.trackitdown.game.logics.db.ProgressDB;
-import com.example.trackitdown.game.logics.db.ProgressWrapper;
 
 public class LevelSelectionView extends Activity {
 
-	public static final String GAME_LVL = "com.example.trackitdown.GAME_LVL";
 	private Intent _startGameIntent;
 	private int _currentLevel;
 	private LvlSelectionImageAdapter _lvlGridAdaptor;
@@ -30,15 +27,12 @@ public class LevelSelectionView extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_level_selection_view);
 		// Show the Up button in the action bar.
 		setupActionBar();
 		gridview = (GridView) findViewById(R.id.gridview);
 		/*get the level from main activity*/
-		_currentLevel = getIntent().getIntExtra(LevelSelectionView.GAME_LVL,0);
+		_currentLevel = getIntent().getIntExtra(GameActivity.GAME_LVL,0);
 		GameLvlMngGenerator.setLevel(_currentLevel);
 		_lvlGridAdaptor = new LvlSelectionImageAdapter(this,_currentLevel);
 	    gridview.setAdapter(_lvlGridAdaptor);
@@ -47,7 +41,7 @@ public class LevelSelectionView extends Activity {
 	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 	            //Toast.makeText(LevelSelectionView.this, "" + position, Toast.LENGTH_SHORT).show();
 	        	if ( position <= _currentLevel ){
-		        	_startGameIntent.putExtra(GAME_LVL, GameLvlMngGenerator.LEVELS.values()[position]);
+		        	_startGameIntent.putExtra(GameActivity.GAME_LVL, GameLvlMngGenerator.LEVELS.values()[position]);
 		    		startActivity(_startGameIntent);
 	        	}else{
 	        		/*if level still locked*/
@@ -62,7 +56,7 @@ public class LevelSelectionView extends Activity {
 	public void onStart(){
 		super.onStart();
 		int newLvl = GameLvlMngGenerator.getCurrentLevel();
-		if ( newLvl != _currentLevel  ){
+		if ( newLvl > _currentLevel  ){
 		//_lvlGridAdaptor.setCurrentLevel(_currentLevel);
 			_currentLevel = newLvl;
 			_lvlGridAdaptor = new LvlSelectionImageAdapter(this, _currentLevel); 
@@ -121,7 +115,7 @@ public class LevelSelectionView extends Activity {
 		//GameLvlMng gameLvlMng = GameLvlMngGenerator.getLvl(GameLvlMngGenerator.LEVELS.LEVEL_1);
 		
 		Intent startGameIntent = new Intent(this, GameActivity.class);
-		startGameIntent.putExtra(GAME_LVL, GameLvlMngGenerator.LEVELS.LEVEL_1);
+		startGameIntent.putExtra(GameActivity.GAME_LVL, GameLvlMngGenerator.LEVELS.LEVEL_1);
 		startActivity(startGameIntent);
 	}
 	
@@ -130,7 +124,7 @@ public class LevelSelectionView extends Activity {
 		//GameLvlMng gameLvlMng = GameLvlMngGenerator.getLvl(GameLvlMngGenerator.LEVELS.LEVEL_1);
 		
 		Intent startGameIntent = new Intent(this, GameActivity.class);
-		startGameIntent.putExtra(GAME_LVL, GameLvlMngGenerator.LEVELS.LEVEL_2);
+		startGameIntent.putExtra(GameActivity.GAME_LVL, GameLvlMngGenerator.LEVELS.LEVEL_2);
 		startActivity(startGameIntent);
 	}
 	
@@ -139,7 +133,7 @@ public void startLevel3( ){
 		//GameLvlMng gameLvlMng = GameLvlMngGenerator.getLvl(GameLvlMngGenerator.LEVELS.LEVEL_1);
 		
 		Intent startGameIntent = new Intent(this, GameActivity.class);
-		startGameIntent.putExtra(GAME_LVL, GameLvlMngGenerator.LEVELS.LEVEL_3);
+		startGameIntent.putExtra(GameActivity.GAME_LVL, GameLvlMngGenerator.LEVELS.LEVEL_3);
 		startActivity(startGameIntent);
 	}
 

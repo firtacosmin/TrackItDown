@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="ball_color_entry_array">
+        <item >Red</item>
+        <item >Green</item>
+        <item >Blue</item>
+    </string-array>
+    <string-array name="ball_color_values_array">
+        <item >red</item>
+        <item >green</item>
+        <item >blue</item>
+    </string-array>
+    <string-array name="ball_speeds_entry_array">
+        <item >Slow</item>
+        <item >Medium</item>
+        <item >Fast</item>
+        <item >Fastest</item>
+    </string-array>
+    <string-array name="ball_speeds_values_array">
+        <item >1</item>
+        <item >2</item>
+        <item >3</item>
+        <item >4</item>
+    </string-array>
+    <string-array name="ball_size_values_array">
+        <item >Big</item>
+        <item >Medium</item>
+        <item >Small</item>
+    </string-array>
+    
+</resources>
