@@ -1,10 +1,8 @@
 package com.example.trackitdown.game.logics.levelManagers;
 
-import com.example.trackitdown.R;
-import com.example.trackitdown.game.drawable.lvlManagementGraphics.HintPrinter;
-
 import android.content.Context;
-import android.graphics.Paint;
+
+import com.example.trackitdown.R;
 
 public class GameLvlMng_custom extends GameLvlMng_lvl  {
 

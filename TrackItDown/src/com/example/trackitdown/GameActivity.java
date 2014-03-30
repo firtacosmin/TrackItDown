@@ -114,7 +114,7 @@ public class GameActivity extends Activity {
 		/*set ball size*/
 		gameLvl.set_ballSize(gameBundle.getInt(CUSTOM_GAME_BUNDLE_BALL_SIZE));
 		/*set ball speed*/
-		gameLvl.set_ballSpeed(gameBundle.getInt(CUSTOM_GAME_BUNDLE_BALL_SIZE));
+		gameLvl.set_ballSpeed(gameBundle.getInt(CUSTOM_GAME_BUNDLE_SPEED));
 		/*set ball no*/
 		gameLvl.set_ballNo(gameBundle.getInt(CUSTOM_GAME_BUNDLE_BALL_NO));
 		/*set win ball no*/

@@ -7,7 +7,8 @@ android:paddingLeft="@dimen/activity_horizontal_margin"
 android:paddingRight="@dimen/activity_horizontal_margin"
 android:paddingTop="@dimen/activity_vertical_margin"
 tools:context=".CustomGameSettings" 
-android:screenOrientation="portrait">
+android:screenOrientation="portrait"
+android:background="@drawable/bk_home">
 
     <!--                        -->
     <!-- The size of the balls  -->
@@ -18,7 +19,9 @@ android:screenOrientation="portrait">
         android:layout_height="wrap_content">
         <TextView 
             android:id="@+id/ball_size_lb"
-            android:text="@string/custom_game_ball_size"/>
+            android:text="@string/custom_game_ball_size"
+            android:textColor="@color/custom_view_text_color"
+            android:textStyle="bold"/>
         <Spinner
             android:id="@+id/ball_size_spin"
 			android:entries="@array/ball_size_values_array"
@@ -35,7 +38,9 @@ android:screenOrientation="portrait">
         android:layout_height="wrap_content">
         <TextView 
             android:id="@+id/total_ball_numberLb"
-            android:text="@string/custom_game_ball_no"/>"
+            android:text="@string/custom_game_ball_no"
+            android:textColor="@color/custom_view_text_color"
+            android:textStyle="bold"/>
         <Spinner
             android:id="@+id/ball_no_spin"
 		    android:layout_width="fill_parent"
@@ -52,7 +57,9 @@ android:screenOrientation="portrait">
         android:layout_height="wrap_content">
         <TextView 
             android:id="@+id/win_ball_numberLb"
-            android:text="@string/custom_game_winning_ball_no"/>
+            android:text="@string/custom_game_winning_ball_no"
+            android:textColor="@color/custom_view_text_color"
+            android:textStyle="bold"/>
         <Spinner
             android:id="@+id/win_ball_no_spin"
 		    android:layout_width="fill_parent"
@@ -70,7 +77,9 @@ android:screenOrientation="portrait">
         android:layout_height="wrap_content" >
 	   	<TextView 
 	   	    android:id="@+id/ball_speed_lb"
-	   	    android:text="@string/ball_speed_pref_name"/>
+	   	    android:text="@string/ball_speed_pref_name"
+          android:textColor="@color/custom_view_text_color"
+          android:textStyle="bold"/>
 		<Spinner 
 			android:id="@+id/circSpeedspin"
 			android:entries="@array/ball_speeds_entry_array"
@@ -89,7 +98,9 @@ android:screenOrientation="portrait">
 		<CheckBox 
 		    android:id="@+id/use_bkink_chk"
 		    android:text="@string/use_blink_pref_name"
-		    android:layout_span="2"/>
+		    android:layout_span="2"
+        android:textColor="@color/custom_view_text_color"
+        android:textStyle="bold"/>
 			
 	</TableRow>
      
@@ -103,7 +114,9 @@ android:screenOrientation="portrait">
         android:layout_height="wrap_content" >
 	   <TextView 
 	       android:id="@+id/circColorSpinLb"
-	       android:text="@string/ball_collor_pref_name"/>
+	       android:text="@string/ball_collor_pref_name"
+         android:textColor="@color/custom_view_text_color"
+         android:textStyle="bold"/>
 	   <Spinner 
 	       android:id="@+id/circColorSpin"
 	       android:entries="@array/ball_color_entry_array"
@@ -121,7 +134,9 @@ android:screenOrientation="portrait">
         android:layout_height="wrap_content" >
 	   <TextView 
 	       android:id="@+id/wincircColorSpinLb"
-	       android:text="@string/win_ball_color_pref_name"/>
+	       android:text="@string/win_ball_color_pref_name"
+         android:textColor="@color/custom_view_text_color"
+         android:textStyle="bold"/>
 	   <Spinner 
 	       android:id="@+id/wincircColorSpin"
 	       android:entries="@array/ball_color_entry_array"

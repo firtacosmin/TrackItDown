@@ -48,6 +48,7 @@
             android:label="@string/title_activity_custom_game_settings"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" 
+            android:textColor="#ff000000"
             android:parentActivityName="com.example.trackitdown.GameActivity">
             <meta-data android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.trackitdown.GameActivity" />
