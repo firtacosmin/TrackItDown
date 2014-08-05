@@ -85,7 +85,7 @@ public class GameMainThread extends Thread {
 				}
 			}
 
-			if ( _gameLvl.stopGame() ){
+			if ( _gameLvl.gameHasStoped() ){
 				/*game won => stop thread*/
 				stopGame();
 				_theContext.finish();

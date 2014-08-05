@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Paint;
 
 import com.example.trackitdown.R;
+import com.example.trackitdown.game.logics.levelManagers.GameLvlMng_lvl.CIRCLE_SIZE;
 
 
 public class GameLvlMng_lvl2  extends GameLvlMng_lvl {
@@ -33,6 +34,7 @@ public class GameLvlMng_lvl2  extends GameLvlMng_lvl {
 		_circleNumber = _lvl2_circleNumber;
 		_observeTime = _lvl2_observeTime;
 		_seekTime = _lvl2_seekTime;
+		set_circleRadius_sizeFactor(CIRCLE_SIZE.LARGE);
 		
 		/*all the circle will be yellow*/
 		_circlesPaint = new Paint();

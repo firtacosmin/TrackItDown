@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Paint;
 
 import com.example.trackitdown.R;
+import com.example.trackitdown.game.logics.levelManagers.GameLvlMng_lvl.CIRCLE_SIZE;
 
 public class GameLvlMng_lvl4 extends GameLvlMng_lvl{
 
@@ -37,7 +38,8 @@ public class GameLvlMng_lvl4 extends GameLvlMng_lvl{
 		_circleNumber = _lvl4_circleNumber;
 		_observeTime = _lvl4_observeTime;
 		_seekTime = _lvl4_seekTime;
-		_circleRadius = _lvl4_circleRadius;
+//		_circleRadius = _lvl4_circleRadius;
+		set_circleRadius_sizeFactor(CIRCLE_SIZE.MEDIUM);
 		/*make circles blink*/
 		_blinkFlag = true;
 		

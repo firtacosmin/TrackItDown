@@ -82,7 +82,7 @@ public class GameLvlMng_custom extends GameLvlMng_lvl  {
 		_seekTime = 2000;
 		_winningCircleNo = _winBallNo;
 		/*teh circle size*/
-		_circleRadius = _allCircleRadiuses[_ballSize];
+		_circleRadiusPixels = _allCircleRadiuses[_ballSize];
 		_blinkFlag = _myblinkFlg;
 		
 		int ballID = getImgIDFromColor(_winBallColor);

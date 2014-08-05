@@ -56,7 +56,8 @@ public class GameLvlMng_lvl1  extends GameLvlMng_lvl {
 		_circleNumber = _lvl1_circleNumber;
 		_observeTime = _lvl1_observeTime;
 		_seekTime = _lvl1_seekTime;
-		_circleRadius = _lvl1_circleRadius;
+//		_circleRadius = _lvl1_circleRadius;
+		set_circleRadius_sizeFactor(CIRCLE_SIZE.LARGE);
 		
 		/*all the circle will be yellow*/
 		_circlesPaint = new Paint();

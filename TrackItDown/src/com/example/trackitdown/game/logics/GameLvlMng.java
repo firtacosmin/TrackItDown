@@ -56,8 +56,13 @@ public interface GameLvlMng {
 	 */
 	public void onEvent(MotionEvent ev);
 	/**
-	 * @desc method that tells if the game has stoped and the thread shoul stop
+	 * @desc method that tells if the game has stoped and the thread should stop
 	 * @return
 	 */
-	public boolean stopGame();
+	public boolean gameHasStoped();
+	
+	/**
+	 * @desc method that will stop the game in the middle
+	 */
+	public void cancelGame();
 }

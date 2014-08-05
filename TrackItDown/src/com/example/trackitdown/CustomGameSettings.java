@@ -1,8 +1,5 @@
 package com.example.trackitdown;
 
-import com.example.trackitdown.game.logics.GameLvlMngGenerator;
-import com.example.trackitdown.game.logics.levelManagers.GameLvlMng_custom;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;

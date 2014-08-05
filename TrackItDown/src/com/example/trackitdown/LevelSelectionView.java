@@ -1,13 +1,12 @@
 package com.example.trackitdown;
 
 import android.app.Activity;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
@@ -16,7 +15,7 @@ import android.widget.Toast;
 import com.example.trackitdown.game.drawable.LvlSelectionImageAdapter;
 import com.example.trackitdown.game.logics.GameLvlMngGenerator;
 
-public class LevelSelectionView extends Activity {
+public class LevelSelectionView extends Activity implements OnItemClickListener{
 
 	private Intent _startGameIntent;
 	private int _currentLevel;
@@ -28,28 +27,12 @@ public class LevelSelectionView extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_level_selection_view);
-		// Show the Up button in the action bar.
-		setupActionBar();
 		gridview = (GridView) findViewById(R.id.gridview);
 		/*get the level from main activity*/
 		_currentLevel = getIntent().getIntExtra(GameActivity.GAME_LVL,0);
-		GameLvlMngGenerator.setLevel(_currentLevel);
 		_lvlGridAdaptor = new LvlSelectionImageAdapter(this,_currentLevel);
 	    gridview.setAdapter(_lvlGridAdaptor);
-	    _startGameIntent = new Intent(this, GameActivity.class);
-	    gridview.setOnItemClickListener(new OnItemClickListener() {
-	        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-	            //Toast.makeText(LevelSelectionView.this, "" + position, Toast.LENGTH_SHORT).show();
-	        	if ( position <= _currentLevel ){
-		        	_startGameIntent.putExtra(GameActivity.GAME_LVL, GameLvlMngGenerator.LEVELS.values()[position]);
-		    		startActivity(_startGameIntent);
-	        	}else{
-	        		/*if level still locked*/
-	        		Toast.makeText(LevelSelectionView.this, getString(R.string.lvl_locked_open_msj), Toast.LENGTH_SHORT).show();
-	        	}
-//	        	}
-	        }
-	    });
+	    gridview.setOnItemClickListener(this);
 
 	}
 
@@ -57,6 +40,7 @@ public class LevelSelectionView extends Activity {
 		super.onStart();
 		int newLvl = GameLvlMngGenerator.getCurrentLevel();
 		if ( newLvl > _currentLevel  ){
+			//TODO: Boolshit :) )) nu trebuie recreat adaptorul
 		//_lvlGridAdaptor.setCurrentLevel(_currentLevel);
 			_currentLevel = newLvl;
 			_lvlGridAdaptor = new LvlSelectionImageAdapter(this, _currentLevel); 
@@ -73,16 +57,6 @@ public class LevelSelectionView extends Activity {
 		_currentLevel = lvl;
 	}
 
-	/**
-	 * Set up the {@link android.app.ActionBar}, if the API is available.
-	 */
-	//@TargetApi(Build.VERSION_CODES.HONEYCOMB)
-	private void setupActionBar() {
-		//if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			//getActionBar().setDisplayHomeAsUpEnabled(true);
-		//}
-	}
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -92,49 +66,25 @@ public class LevelSelectionView extends Activity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		//switch (item.getItemId()) {
-		//case android.R.id.home:
-			// This ID represents the Home or Up button. In the case of this
-			// activity, the Up button is shown. Use NavUtils to allow users
-			// to navigate up one level in the application structure. For
-			// more details, see the Navigation pattern on Android Design:
-			//
-			// http://developer.android.com/design/patterns/navigation.html#up-vs-back
-			//
-			//NavUtils.navigateUpFromSameTask(this);
-			//return true;
-		//}
 		return super.onOptionsItemSelected(item);
 	}
-	
-	/**
-	 * @param view
+
+	/* (non-Javadoc)
+	 * @see android.widget.AdapterView.OnItemClickListener#onItemClick(android.widget.AdapterView, android.view.View, int, long)
+	 * @desc when a level is selected this method is called.
 	 */
-	public void startLevel1( ){
-		
-		//GameLvlMng gameLvlMng = GameLvlMngGenerator.getLvl(GameLvlMngGenerator.LEVELS.LEVEL_1);
-		
-		Intent startGameIntent = new Intent(this, GameActivity.class);
-		startGameIntent.putExtra(GameActivity.GAME_LVL, GameLvlMngGenerator.LEVELS.LEVEL_1);
-		startActivity(startGameIntent);
-	}
-	
-	public void startLevel2( ){
-		
-		//GameLvlMng gameLvlMng = GameLvlMngGenerator.getLvl(GameLvlMngGenerator.LEVELS.LEVEL_1);
-		
-		Intent startGameIntent = new Intent(this, GameActivity.class);
-		startGameIntent.putExtra(GameActivity.GAME_LVL, GameLvlMngGenerator.LEVELS.LEVEL_2);
-		startActivity(startGameIntent);
-	}
-	
-public void startLevel3( ){
-		
-		//GameLvlMng gameLvlMng = GameLvlMngGenerator.getLvl(GameLvlMngGenerator.LEVELS.LEVEL_1);
-		
-		Intent startGameIntent = new Intent(this, GameActivity.class);
-		startGameIntent.putExtra(GameActivity.GAME_LVL, GameLvlMngGenerator.LEVELS.LEVEL_3);
-		startActivity(startGameIntent);
-	}
+	@Override
+	public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+        //Toast.makeText(LevelSelectionView.this, "" + position, Toast.LENGTH_SHORT).show();
+	    _startGameIntent = new Intent(this, GameActivity.class);
+    	if ( position <= _currentLevel + 1 ){
+        	_startGameIntent.putExtra(GameActivity.GAME_LVL, GameLvlMngGenerator.LEVELS.values()[position]);
+    		startActivity(_startGameIntent);
+    	}else{
+    		/*if level still locked*/
+    		Toast.makeText(LevelSelectionView.this, getString(R.string.lvl_locked_open_msj), Toast.LENGTH_SHORT).show();
+    	}
+//    	}
+    }
 
 }

@@ -22,6 +22,12 @@ public class GameLvlMng_lvl implements GameLvlMng {
 
 	protected enum GAME_STATES{PLAY, CHOSE, STATUS_WIN, STATUS_LOSE};
 	private enum PHISICS_TO_DO{WALL, COLLISION};
+	public enum CIRCLE_SIZE{SMALL, MEDIUM, LARGE};
+	
+	/**
+	 * @desc the procentage of the screen height that the circle's radius must be
+	 */
+	private static int CIRCLE_RADIUS_PROCENTAGE = 1;
 	
 	private static final int _STATUS_WAIT_TIME=500;
 	
@@ -41,7 +47,9 @@ public class GameLvlMng_lvl implements GameLvlMng {
 	 * */
 	protected int _speed = 1;
 	protected int _circleNumber = 10;	
-	protected int _circleRadius = 25;
+	protected int _circleRadiusPixels = 25;
+	private CIRCLE_SIZE _circleRadiusSizeFactor = CIRCLE_SIZE.SMALL;
+	private boolean sizePasedAsFactor = false;
 	/**
 	 * the amount of time the win circle has different color.
 	 */
@@ -59,6 +67,9 @@ public class GameLvlMng_lvl implements GameLvlMng {
 	
 	
 	
+	/**
+	 * @desc All the circles that are drawn on the board including the winning ones
+	 */
 	protected Vector<MyCircle> _theCircles;
 	protected  Vector<MyCircle> _winningCircle;
 	protected LvlGraphics _theGraphics;
@@ -153,7 +164,10 @@ public class GameLvlMng_lvl implements GameLvlMng {
 	 * @desc method called before the start of the game thread to indicate that the game is starting 
 	 */
 	public void startGame(){
+		calculateCircleSizeFromSizeFactor();
 		_gameState = GAME_STATES.PLAY;
+		_win = false;
+		_stop = false;
 		startStageTimer();
 	}
 	
@@ -171,7 +185,9 @@ public class GameLvlMng_lvl implements GameLvlMng {
 		_nextLvl_img_btn = _theContext.getResources().getDrawable( R.drawable.farward);
 	}
 	
-	
+	public void cancelGame(){
+		_stop = true;
+	}
 
 	/**
 	 * @desc Method for setting the image used for setting the image used for drawing the winning circles
@@ -339,7 +355,7 @@ public class GameLvlMng_lvl implements GameLvlMng {
 	public boolean checkWin(){
 		return _win;
 	}	
-	public boolean stopGame(){
+	public boolean gameHasStoped(){
 		return _stop;
 	}
 	
@@ -355,16 +371,11 @@ public class GameLvlMng_lvl implements GameLvlMng {
 	}
 
 	
-	/*
-	 * 
-	 * PROTECTED METHODS
-	 * 
-	 * */
-	
 
 	/**
 	 * @desc the method that initializes the circles and generates 
 	 *       random positions for them 
+	 * TODO: all circles start in one direction
 	 */
 	public void generateStartRandomCircles(){
 		_winningCircle = new Vector<MyCircle>();
@@ -379,7 +390,7 @@ public class GameLvlMng_lvl implements GameLvlMng {
 			if ( (new Random()).nextInt(100) % 2 == 0){
 				winningCircle.getTrajectory().flipXDirection();
 			}
-			winningCircle.setRadius(_circleRadius);
+			winningCircle.setRadius(_circleRadiusPixels);
 			_winningCircle.add(winningCircle);
 			/*add the winning circle*/
 			_theCircles.add(winningCircle);
@@ -401,7 +412,7 @@ public class GameLvlMng_lvl implements GameLvlMng {
 				c.getTrajectory().flipXDirection();
 			}
 			c.getTrajectory().setXSpeed(_speed);
-			c.setRadius(_circleRadius);
+			c.setRadius(_circleRadiusPixels);
 			_theCircles.add(c);
 		}
 	}
@@ -436,6 +447,18 @@ public class GameLvlMng_lvl implements GameLvlMng {
 		circ.draw(c);
 	}
 	
+	private void calculateCircleSizeFromSizeFactor(){
+		if ( sizePasedAsFactor ){
+			/*calculating the pixels for a unit*/
+			int radiusUnit = _screenHeight*CIRCLE_RADIUS_PROCENTAGE/100;
+			_circleRadiusPixels = radiusUnit *( _circleRadiusSizeFactor.ordinal() + 1)*2;
+			/*apply the size to the circles*/
+			for ( MyCircle c : _theCircles ){
+				c.setRadius(_circleRadiusPixels);
+			}
+		}
+	}
+	
 	/**
 	 * @desc if the passed point coordinates are in a winning circle 
 	 *       then it will return true
@@ -453,10 +476,10 @@ public class GameLvlMng_lvl implements GameLvlMng {
 			int winX = circ.getTrajectory().getCurrentPoint().x;
 			int winY = circ.getTrajectory().getCurrentPoint().y;
 			
-			if ( x <= winX + _circleRadius && 
-				 x >= winX - _circleRadius && 
-				 y <= winY + _circleRadius &&
-				 y >= winY - _circleRadius){
+			if ( x <= winX + _circleRadiusPixels && 
+				 x >= winX - _circleRadiusPixels && 
+				 y <= winY + _circleRadiusPixels &&
+				 y >= winY - _circleRadiusPixels){
 				return true;
 			}
 		}
@@ -559,26 +582,26 @@ public class GameLvlMng_lvl implements GameLvlMng {
 			/* and if it is going in the right direction*/
 			if (circ.getTrajectory().getCurrentPoint().x 
 					>= 
-				_screenWidth - _circleRadius                 && 
+				_screenWidth - _circleRadiusPixels                 && 
 			    circ.getTrajectory().getXDirection() 
 			    	== 
 			    Trajectory.DIRECTION_X.RIGHT                 || 
 			    circ.getTrajectory().getCurrentPoint().x 
 			    	<= 
-			    _circleRadius                                && 
+			    _circleRadiusPixels                                && 
 			    circ.getTrajectory().getXDirection() 
 			    	== 
 			    Trajectory.DIRECTION_X.LEFT ){
 				circ.getTrajectory().flipXDirection();
 			}else if ( circ.getTrajectory().getCurrentPoint().y 
 							>= 
-					   _screenHeight - _circleRadius         &&
+					   _screenHeight - _circleRadiusPixels         &&
 					   circ.getTrajectory().getYDirection() 
 					   		== 
 					   Trajectory.DIRECTION_Y.DOWN           ||
 					   circ.getTrajectory().getCurrentPoint().y 
 					   		<= 
-					   _circleRadius                         && 
+					   _circleRadiusPixels                         && 
 					   circ.getTrajectory().getYDirection() 
 					   		== 
 					   Trajectory.DIRECTION_Y.UP){
@@ -599,7 +622,7 @@ public class GameLvlMng_lvl implements GameLvlMng {
 		Point firstP = _theCircles.get(first).getTrajectory().getCurrentPoint();
 		Point secondP = _theCircles.get(second).getTrajectory().getCurrentPoint();
 		double distance = Math.sqrt((secondP.x - firstP.x)*(secondP.x - firstP.x) + (secondP.y - firstP.y)*(secondP.y - firstP.y));
-		if ( distance < 2.5*_circleRadius )
+		if ( distance < 2.5*_circleRadiusPixels )
 		{
 			//Log.d("Colision", first + " with " +second );
 			/*Collision detected*/
@@ -701,16 +724,16 @@ public class GameLvlMng_lvl implements GameLvlMng {
 		Point p = new Point();
 		Boolean retry = true;
 		while(retry){
-			p.x = rand.nextInt(_screenWidth - 2*_circleRadius);
-			p.y = rand.nextInt(_screenHeight - 2*_circleRadius);
+			p.x = rand.nextInt(_screenWidth - 2*_circleRadiusPixels);
+			p.y = rand.nextInt(_screenHeight - 2*_circleRadiusPixels);
 			Iterator<MyCircle> circleIt = _theCircles.iterator();
 			retry = false;
 			while(circleIt.hasNext() && !retry){
 				MyCircle circ = circleIt.next();
-				if ( circ.getTrajectory().getCurrentPoint().x <= p.x+2*_circleRadius &&
-					 circ.getTrajectory().getCurrentPoint().x >= p.x-2*_circleRadius && 
-					 circ.getTrajectory().getCurrentPoint().y <= p.y+2*_circleRadius &&
-					 circ.getTrajectory().getCurrentPoint().y >= p.y-2*_circleRadius ){
+				if ( circ.getTrajectory().getCurrentPoint().x <= p.x+2*_circleRadiusPixels &&
+					 circ.getTrajectory().getCurrentPoint().x >= p.x-2*_circleRadiusPixels && 
+					 circ.getTrajectory().getCurrentPoint().y <= p.y+2*_circleRadiusPixels &&
+					 circ.getTrajectory().getCurrentPoint().y >= p.y-2*_circleRadiusPixels ){
 					retry = true;
 				}
 			}
@@ -875,10 +898,10 @@ public class GameLvlMng_lvl implements GameLvlMng {
 			int winX = circ.getTrajectory().getCurrentPoint().x;
 			int winY = circ.getTrajectory().getCurrentPoint().y;
 			
-			if ( x <= winX + _circleRadius && 
-				 x >= winX - _circleRadius && 
-				 y <= winY + _circleRadius &&
-				 y >= winY - _circleRadius){
+			if ( x <= winX + _circleRadiusPixels && 
+				 x >= winX - _circleRadiusPixels && 
+				 y <= winY + _circleRadiusPixels &&
+				 y >= winY - _circleRadiusPixels){
 				/*touched the winning circle*/
 				return true;
 			}
@@ -895,8 +918,15 @@ public class GameLvlMng_lvl implements GameLvlMng {
 		this._circleNumber = _circleNumber;
 	}
 
-	public void set_circleRadius(int _circleRadius) {
-		this._circleRadius = _circleRadius;
+	public void set_circleRadius_sizeFactor(CIRCLE_SIZE _circleRadius) {
+		
+		_circleRadiusSizeFactor = _circleRadius;
+		sizePasedAsFactor = true;
+		
+	}
+	public void set_circleRadius_pixels(int cirlceRadiusPixels){
+		this._circleRadiusPixels = cirlceRadiusPixels;
+		sizePasedAsFactor = false;
 	}
 
 	public void set_observeTime(long _observeTime) {

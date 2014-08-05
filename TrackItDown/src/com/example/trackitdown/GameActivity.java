@@ -7,16 +7,12 @@ import android.graphics.Point;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.Menu;
-import android.view.Window;
-import android.view.WindowManager;
 
 import com.example.trackitdown.game.drawable.GameSurfaceView;
 import com.example.trackitdown.game.logics.GameLvlMng;
 import com.example.trackitdown.game.logics.GameLvlMngGenerator;
 import com.example.trackitdown.game.logics.GameMainThread;
 import com.example.trackitdown.game.logics.levelManagers.GameLvlMng_custom;
-import com.example.trackitdown.game.logics.levelManagers.GameLvlMng_lvl;
-import com.example.trackitdown.game.logics.levelManagers.GameLvlMng_lvl1;
 
 public class GameActivity extends Activity {
 
@@ -26,6 +22,7 @@ public class GameActivity extends Activity {
 	private GameMainThread _gameThread;
 	private GameLvlMngGenerator.LEVELS _theLevel;
 	private GameLvlMng_custom _customLvl;
+	private GameLvlMng _gameLvlMng;
 	public static final String GAME_LVL = "com.example.trackitdown.GAME_LVL";
 	public static final String CUSTOM_GAME_LVL_BUNDLE = "com.example.trackitdown.CUSTOM_GAME_LVL";
 	public static final String CUSTOM_GAME_BUNDLE_BALL_NO = "com.example.trackitdown.customgame.bundle.ballno";
@@ -60,13 +57,14 @@ public class GameActivity extends Activity {
 			/*if no custom level is passed then initialize with null*/
 			_customLvl = null;
 		}
-		GameLvlMng gameLvlMng = null;
+		/*get the level manager*/
+		_gameLvlMng = null;
 		if ( _theLevel != null ){
-			/*no level is passed*/
-			/*check if custom level is passed*/
-			gameLvlMng = GameLvlMngGenerator.getLvl(_theLevel,this);
+			/*level is passed*/
+			_gameLvlMng = GameLvlMngGenerator.getLvl(_theLevel,this);
 		}else if ( _customLvl != null ){
-			gameLvlMng = _customLvl;
+			/*if no level is passed then get the custom level*/
+			_gameLvlMng = _customLvl;
 		}
 		
 		Display display = getWindowManager().getDefaultDisplay();
@@ -82,7 +80,7 @@ public class GameActivity extends Activity {
 			height = display.getHeight(); 
 		}
 		
-		_gameThread.setGameLvlMng(gameLvlMng);
+		_gameThread.setGameLvlMng(_gameLvlMng);
 		_gameThread.setDisplaySize(width, height);
 		
 		
@@ -100,6 +98,11 @@ public class GameActivity extends Activity {
 		
 		
 		return true;
+	}
+	public void onStop(){
+		super.onStop();
+		_gameLvlMng.cancelGame();
+		
 	}
 	/**
 	 * @desc will get the data from the bundle and will create a custom game level
